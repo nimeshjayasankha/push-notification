@@ -33,7 +33,9 @@ const firebaseCloudMessaging = {
 
         // Request the push notification permission from browser
         const status = await Notification.requestPermission();
+        alert("status");
         alert(status);
+
         if (status && status === "granted") {
           // Get new token from Firebase
           const fcm_token = await messaging.getToken({

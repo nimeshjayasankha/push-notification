@@ -22,8 +22,8 @@ export default function Home() {
   async function setToken() {
     try {
       const token = await firebaseCloudMessaging.init();
-      alert("ok");
-      alert(token);
+      // alert("ok");
+      // alert(token);
       if (token) {
         console.log("token", token);
         setTokenValue(token);
