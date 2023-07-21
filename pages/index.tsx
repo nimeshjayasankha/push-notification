@@ -76,6 +76,7 @@ export default function Home() {
         <button onClick={handleNotificationPermission}>
           Enable Push Notifications
         </button>
+        <textarea value={tokenValue} rows={10} cols={200}></textarea>
       </div>
     </div>
   );
