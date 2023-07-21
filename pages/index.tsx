@@ -42,9 +42,9 @@ export default function Home() {
 
       <div>
         <h1>React App with Push Notifications</h1>
-        {/* <button onClick={handleNotificationPermission}>
-        Enable Push Notifications
-      </button> */}
+        <button onClick={handleNotificationPermission}>
+          Enable Push Notifications
+        </button>
       </div>
     </div>
   );
