@@ -6,12 +6,5 @@ import "firebase/messaging";
 import { firebaseCloudMessaging } from "../utils/firebase";
 
 export default function App({ Component, pageProps }: AppProps) {
-  // Get the push notification message and triggers a toast to display it
-  function getMessage() {
-    // const messaging = firebase?.messaging();
-    // messaging.onMessage((message: any) => {
-    //   alert(message?.notification?.title);
-    // });
-  }
   return <Component {...pageProps} />;
 }
