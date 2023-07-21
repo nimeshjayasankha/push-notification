@@ -25,8 +25,7 @@ const firebaseCloudMessaging = {
       try {
         const messaging = firebase.messaging();
         const tokenInLocalForage = await localforage.getItem("fcm_token");
-        alert("tokenInLocalForage");
-        alert(tokenInLocalForage);
+
         // Return the token if it is alredy in our local storage
         if (tokenInLocalForage !== null) {
           return tokenInLocalForage;
@@ -34,22 +33,20 @@ const firebaseCloudMessaging = {
 
         // Request the push notification permission from browser
         const status = await Notification.requestPermission();
-        alert("status");
-        alert(status);
 
-        if (status && status === "granted") {
-          // Get new token from Firebase
-          const fcm_token = await messaging.getToken({
-            vapidKey:
-              "BP93C7WuTic-qeOk0s-BGxZBHXkYDmGEtvMoCuRJzi7PuOLLktk4Y0Pw1ym4u8bnO2GZ9rvcPP_aYB2iZw1yHag",
-          });
+        // if (status && status === "granted") {
+        // Get new token from Firebase
+        const fcm_token = await messaging.getToken({
+          vapidKey:
+            "BP93C7WuTic-qeOk0s-BGxZBHXkYDmGEtvMoCuRJzi7PuOLLktk4Y0Pw1ym4u8bnO2GZ9rvcPP_aYB2iZw1yHag",
+        });
 
-          // Set token in our local storage
-          if (fcm_token) {
-            localforage.setItem("fcm_token", fcm_token);
-            return fcm_token;
-          }
+        // Set token in our local storage
+        if (fcm_token) {
+          localforage.setItem("fcm_token", fcm_token);
+          return fcm_token;
         }
+        // }
       } catch (error) {
         console.error(error);
         return null;
