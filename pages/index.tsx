@@ -1,8 +1,38 @@
 import Head from "next/head";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 import styles from "../styles/Home.module.css";
+import { firebaseCloudMessaging } from "../utils/firebase";
 
 export default function Home() {
+  const [tokenValue, setTokenValue] = useState("");
+  useEffect(() => {
+    setToken();
+
+    // Event listener that listens for the push notification event in the background
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.addEventListener("message", (event) => {
+        console.log("event for the service worker", event);
+      });
+    }
+
+    // Calls the getMessage() function if the token is there
+  }, []);
+
+  async function setToken() {
+    try {
+      const token = await firebaseCloudMessaging.init();
+      alert("ok");
+      if (token) {
+        console.log("token", token);
+        setTokenValue(token);
+        //  getMessage();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   async function askNotificationPermission() {
     try {
       const permissionResult = await Notification.requestPermission();
@@ -16,7 +46,7 @@ export default function Home() {
   async function handleNotificationPermission() {
     const permissionResult = await askNotificationPermission();
     if (permissionResult === "granted") {
-      alert("ok");
+      setToken();
       // User granted notification permission
       // Now you can subscribe to push notifications
     } else if (permissionResult === "denied") {
